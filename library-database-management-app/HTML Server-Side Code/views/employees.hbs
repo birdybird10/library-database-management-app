@@ -1,0 +1,66 @@
+<!--Citation for employees.hbs:
+Date: 05/17/2024
+Copied steps 4 and 5 from nodejs-starter-app
+Authors (github username): gkochera, Cortona1, currym-osu, dmgs11
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+-->
+
+<!-- display all Employees using a table-->
+{{!-- Create a table --}}
+<h2>Employees</h2>
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th align="left">Employee ID</th>
+            <th align="left">First Name</th>
+            <th align="left">Last Name</th>
+            <th align="left">Email</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the employeeID, employeeFirstName, employeeLastName, and employeeEmail in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.employeeID}}</td>
+            <td>{{this.employeeFirstName}}</td>
+            <td>{{this.employeeLastName}}</td>
+            <td>{{this.employeeEmail}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- local navbar for hidden forms --}}
+<nav class="navbar-forms">
+        <a href="#" onclick="showDiv('add-employee')">Add Employee</a>
+</nav>
+
+
+<!-- INSERT a new Employee using an HTML form with POST 
+Gather employeeFirstName, employeeLastName, and employeeEmail as input-->
+<div id="add-employee" hidden>
+<h2>Add a new Employee</h2>
+<p>To add a new employee, please enter their information below and click `Submit`!</p>
+<form id="add-employee-form" method="POST" action="/add-employee-form">
+    <label for="input-employeeFirstName">First name: </label>
+    <input type="text" name="input-employeeFirstName" id="input-employeeFirstName">
+    
+    <label for="input-employeeLastName">Last name: </label>
+    <input type="text" name="input-employeeLastName" id="input-employeeLastName">
+
+    <label for="input-employeeEmail">Email: </label>
+    <input type="text" name="input-employeeEmail" id="input-employeeEmail">
+
+    <p>
+    <input type="submit">
+    </p>
+</form>
+</div>

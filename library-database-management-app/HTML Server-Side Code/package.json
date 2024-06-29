@@ -1,0 +1,30 @@
+{
+  "name": "wandering-words",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kj263/Wandering-Words.git"
+  },
+  "author": "allison majors",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kj263/Wandering-Words/issues"
+  },
+  "homepage": "https://github.com/Kj263/Wandering-Words#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-handlebars": "^7.1.2",
+    "forever": "^4.0.3",
+    "handlebars.moment": "^1.0.4",
+    "moment": "^2.30.1",
+    "mysql": "^2.18.1"
+  },
+  "description": "",
+  "devDependencies": {
+    "handlebars-helper-moment": "^0.2.0"
+  }
+}

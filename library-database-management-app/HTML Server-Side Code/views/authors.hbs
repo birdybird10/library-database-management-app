@@ -1,0 +1,60 @@
+<!--Citation for authors.hbs:
+Date: 05/17/2024
+Copied steps 4 and 5 from nodejs-starter-app
+Authors (github username): gkochera, Cortona1, currym-osu, dmgs11
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+-->
+
+<!-- display all Authors using a table-->
+{{!-- Create a table --}}
+<h2>Authors</h2>
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th align="left">Author ID</th>
+            <th align="left">First Name</th>
+            <th align="left">Last Name</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the authorID, authorFirstName, authorLastName in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.authorID}}</td>
+            <td>{{this.authorFirstName}}</td>
+            <td>{{this.authorLastName}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- local navbar for hidden forms --}}
+<nav class="navbar-forms">
+        <a href="#" onclick="showDiv('add-author')">Add Author</a>
+</nav>
+
+<!-- INSERT a new Author using an HTML form with POST 
+Gather first name and last name as input-->
+<div id = "add-author" hidden>
+<h2>Add a new Author</h2>
+<p>To add a new author, please enter its information below and click `Submit`!</p>
+<form id="add-author-form" method="POST" action="/add-author-form">
+    <label for="input-authorFirstName">First name: </label>
+    <input type="text" name="input-authorFirstName" id="input-authorFirstName">
+    
+    <label for="input-authorLastName">Last name: </label>
+    <input type="text" name="input-authorLastName" id="input-authorLastName">
+    
+    <p>
+    <input type="submit">
+    </p>
+</form>
+</div>

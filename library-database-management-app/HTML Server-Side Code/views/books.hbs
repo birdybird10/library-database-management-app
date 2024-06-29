@@ -1,0 +1,65 @@
+<!--Citation for books.hbs:
+Date: 05/17/2024
+Copied steps 4 and 5 from nodejs-starter-app
+Authors (github username): gkochera, Cortona1, currym-osu, dmgs11
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+-->
+
+<!-- display all Books using a table-->
+{{!-- Create a table --}}
+<h2>Books</h2>
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th align="left">Book ID</th>
+            <th align="left">Book Title</th>
+            <th align="left">Genre</th>
+            <th align="left">Number of Copies</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the bookID, bookTitle, bookGenre, and numCopies in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.bookID}}</td>
+            <td>{{this.bookTitle}}</td>
+            <td>{{this.genre}}</td>
+            <td>{{this.numCopies}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- local navbar for hidden forms --}}
+<nav class="navbar-forms">
+        <a href="#" onclick="showDiv('add-book')">Add Book</a>
+</nav>
+
+<!-- INSERT a new Book using an HTML form with POST 
+Gather title, genre, and numCopies as input-->
+<div id="add-book" hidden>
+<h2>Add a new Book</h2>
+<p>To add a new book, please enter its information below and click `Submit`!</p>
+<form id="add-book-form" method="POST" action="/add-book-form">
+    <label for="input-bookTitle">Book title: </label>
+    <input type="text" name="input-bookTitle" id="input-bookTitle">
+    
+    <label for="input-genre">Genre: </label>
+    <input type="text" name="input-genre" id="input-genre">
+
+    <label for="input-numCopies">Number of copies: </label>
+    <input type="number" name="input-numCopies" id="input-numCopies">
+
+    <p>
+    <input type="submit">
+    </p>
+</form>
+</div>

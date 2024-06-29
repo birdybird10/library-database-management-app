@@ -1,0 +1,187 @@
+<!--Citation for index.hbs:
+Date: 05/17/2024
+Copied steps 4-8 from nodejs-starter-app
+Authors (github username): gkochera, Cortona1, currym-osu, dmgs11
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+
+Date: 05/20/2024
+Utilized information on Handlebars and Moments
+Authors (stackoverflow username): nikc.org
+Source URL: https://stackoverflow.com/questions/33863553/using-handlebar-template-with-moment
+-->
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+{{!-- the checkouts entity acts as our index page --}}
+
+
+<!-- display Checkouts using a table-->
+<h2>Checkouts</h2>
+{{!-- Create a table --}}
+<table id = "checkouts-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th align="left">Checkout ID</th>
+            <th align="left">Member ID</th>
+            <th align="left">Employee ID</th>
+            <th align="left">Date Checked Out</th>
+            <th align="left">Date Due</th>
+            <th align="left">Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the checkoutID, member, employee, dateCheckedOut and dateDue in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.checkoutID}}</td>
+            <td>{{this.member}}</td>
+            {{#if employee}}
+            <td>{{this.employee}}</td>
+            {{else}}
+            <td>Self Checkout (NULL)</td>
+            {{/if}}
+            <td>{{moment this.dateCheckedOut format="MM-DD-YYYY"}}</td>
+            <td>{{moment this.dateDue format="MM-DD-YYYY"}}</td>
+            <td><button onclick="deleteCheckout({{this.checkoutID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_checkout.js"></script>
+
+
+{{!-- local navbar for hidden forms --}}
+<nav class="navbar-forms">
+        <a href="#" onclick="showDiv('add-checkout')">Add Checkout</a>
+        <a href="#" onclick="showDiv('update-checkout')">Update Checkout</a>
+        <a href="#" onclick="showDiv('checked-out-books')">Show All Checked Out Books</a>
+</nav>
+
+
+
+{{!--display all checked out books using a table --}}
+<div id="checked-out-books" hidden>
+<h2>Checked Out Books</h2>
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th align="left">Checkout ID</th>
+            <th align="left">Book Title</th>
+            <th align="left">Date Returned</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the checkoutID, bookTitle, and dateReturned in order --}}
+        {{#each checkedOutBooks}}
+        <tr>
+            <td>{{this.checkoutID}}</td>
+            <td>{{this.bookTitle}}</td>
+            {{#if this.dateReturned}}
+            <td>{{moment this.dateReturned format = "MM-DD-YYYY"}}</td>
+            {{else}}
+            <td>Checked Out</td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+</div>
+
+
+
+<!-- INSERT a new Checkout using an HTML form with POST 
+Gather member and employee with input from dropdown fields 
+Gather dateCheckedOut and dateDue as date input-->
+<div id="add-checkout" hidden>
+<h2>Add a New Checkout</h2>
+<p>To add a new checkout, please enter its information below and click `Submit`!</p>
+<form id="add-checkout-form" method="POST" action="/add-checkout-form">
+    <label for="input-member">Member: </label>
+    <select name="input-member" id="input-member-ajax">
+        <option value="">Select a Member</option>
+        {{#each members}}
+        <option value="{{this.memberID}}">{{this.member}}</option>
+        {{/each}}
+    </select>
+    
+    <label for="input-employee">Employee: </label>
+    <select name="input-employee" id="input-employee-ajax">
+        <option value="">Select an Employee</option>
+        {{#each employees}}
+        <option value="{{this.employeeID}}">{{this.employee}}</option>
+        {{/each}}
+        <option value="null">No employee (self-checkout)</option>
+    </select>
+
+    <label for="input-dateCheckedOut">Date checked out: </label>
+    <input type="date" name="input-dateCheckedOut" id="input-dateCheckedOut" required>
+
+    <label for="input-dateDue">Date due: </label>
+    <input type="date" name="input-dateDue" id="input-dateDue" required>
+    
+    <p></p>
+    <input type="submit">
+</form>
+</div>
+
+
+<!-- UPDATE a Checkout -->
+<div id="update-checkout" hidden>
+<h2>Update a Checkout</h2>
+<p>To update a checkout, please fill in the below fields and click 'Submit'!</p>
+<form id="update-checkout-form-ajax">
+
+    <label for="input-checkoutID">Checkout: </label>
+    <select name="input-checkoutID" id="mySelect">
+        <option value="test">Select an Checkout</option>
+        {{#each data}}
+        <option value="{{this.checkoutID}}">{{this.checkoutID}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-member">Member: </label>
+    <select name="input-member" id="input-member-update">
+        <option>Select a Member</option>
+        {{#each members}}
+        <option value="{{this.memberID}}">{{this.member}}</option>
+        {{/each}}
+    </select>
+
+    <label for='input-employee'>Employee: </label>
+    <select name="input-employee" id="input-employee-update">
+        <option>Select an Employee</option>
+        {{#each employees}}
+        <option value="{{this.employeeID}}">{{this.employee}}</option>
+        {{/each}}
+        <option value=''>No employee (self-checkout)</option>
+    </select>
+
+    <label for="input-dateCheckedOut">Date checked out: </label>
+    <input type="date" name="input-dateCheckedOut" id="input-dateCheckedOut-update" required>
+
+    <label for="input-dateDue">Date due: </label>
+    <input type="date" name="input-dateDue" id="input-dateDue-update" required>
+    
+    <p></p>
+    <input type="submit">
+
+</form>
+</div>
+
+<script src="./js/update_checkout.js"></script>

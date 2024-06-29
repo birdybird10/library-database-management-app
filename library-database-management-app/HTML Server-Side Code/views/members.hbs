@@ -1,0 +1,65 @@
+<!--Citation for members.hbs:
+Date: 05/17/2024
+Copied steps 4 and 5 from nodejs-starter-app
+Authors (github username): gkochera, Cortona1, currym-osu, dmgs11
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+-->
+
+<!-- display all Members using a table-->
+{{!-- Create a table --}}
+<h2>Members</h2>
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th align="left">Member ID</th>
+            <th align="left">First Name</th>
+            <th align="left">Last Name</th>
+            <th align="left">Email</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the memberID, memberFirstName, memberLastName, and memberEmail in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.memberID}}</td>
+            <td>{{this.memberFirstName}}</td>
+            <td>{{this.memberLastName}}</td>
+            <td>{{this.memberEmail}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- local navbar for hidden forms --}}
+<nav class="navbar-forms">
+        <a href="#" onclick="showDiv('add-member')">Add Member</a>
+</nav>
+
+<!-- INSERT a new Member using an HTML form with POST 
+Gather memberFirstName, memberLastName, and memberEmail as input-->
+<div id="add-member" hidden>
+<h2>Add a new Member</h2>
+<p>To add a new member, please enter its information below and click `Submit`!</p>
+<form id="add-member-form" method="POST" action="/add-member-form">
+    <label for="input-memberFirstName">First name: </label>
+    <input type="text" name="input-memberFirstName" id="input-memberFirstName">
+    
+    <label for="input-memberLastName">Last name: </label>
+    <input type="text" name="input-memberLastName" id="input-memberLastName">
+
+    <label for="input-memberEmail">Email: </label>
+    <input type="text" name="input-memberEmail" id="input-memberEmail">
+
+    <p>
+    <input type="submit">
+    </p>
+</form>
+</div>

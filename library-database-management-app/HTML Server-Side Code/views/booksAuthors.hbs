@@ -1,0 +1,68 @@
+<!--Citation for booksAuthors.hbs:
+Date: 05/17/2024
+Copied steps 4, 5, and 6 from nodejs-starter-app
+Authors (github username): gkochera, Cortona1, currym-osu, dmgs11
+Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main
+-->
+
+<!-- display booksAuthors using a table-->
+{{!-- Create a table --}}
+<h2>Books with Authors</h2>
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            <th align="left">Author Book ID</th>
+            <th align="left">Book ID</th>
+            <th align="left">Author ID</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the booksAuthorsID, bookID, and authorID in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.booksAuthorsID}}</td>
+            <td>{{this.bookID}}</td>
+            <td>{{this.authorID}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<nav class="navbar-forms">
+        <a href="#" onclick="showDiv('add-book-author')">Pair Book to Existing Author</a>
+</nav>
+
+
+<!-- INSERT a new bookAuthor using an HTML form with POST 
+Gather book and author with input from dropdown fields -->
+<div id="add-book-author" hidden>
+<h2>Add a New Book Author Connection</h2>
+<p>To add a book author connection, please enter its information below and click `Submit`!</p>
+<form id="add-bookAuthor-form" method="POST" action="/add-bookAuthor-form">
+    <label for="input-book">Book: </label>
+    <select name="input-book" id="input-book-ajax">
+        <option value="">Select a Book</option>
+        {{#each books}}
+        <option value="{{this.bookID}}">{{this.bookTitle}}</option>
+        {{/each}}
+    </select>
+    
+    <label for="input-author">Author: </label>
+    <select name="input-author" id="input-author-ajax">
+        <option value="">Select an Author</option>
+        {{#each authors}}
+        <option value="{{this.authorID}}">{{this.author}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit">
+</form>
+</div>
