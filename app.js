@@ -8,9 +8,10 @@
 /*
     SETUP
 */
+require('dotenv').config()
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 3000;                 // Set a port number at the top so it's easy to change in the future
+const PORT = process.env.PORT;               // Set a port number at the top so it's easy to change in the future
 
 
 app.use(express.json())
