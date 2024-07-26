@@ -10,13 +10,11 @@ var mysql = require('mysql2')
 // Create a 'connection pool' using the provided credentials
 var pool = mysql.createPool({
     connectionLimit : 10,
-    host            : 'localhost',
-    user            : 'root',
-    password        : '12DancingPrincesses!*',
-    database        : 'librarydb'
+    host            : 'o677vxfi8ok6exrd.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+    user            : 'wflfpvwxhwi0vqec',
+    password        : 'g9dnxqaf6s6091iv',
+    database        : 'vre6ig8fca1511d8'
 })
-
-
 
 // Export it for use in our applicaiton
 module.exports.pool = pool;
