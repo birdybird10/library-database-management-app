@@ -6,7 +6,6 @@
 
 import 'dotenv/config';
 
-const password = process.env.PASSWORD;
 // Get an instance of mysql we can use in the app
 var mysql = require('mysql2')
 
@@ -15,7 +14,7 @@ var pool = mysql.createPool({
     connectionLimit : 10,
     host            : 'localhost',
     user            : 'root',
-    password        : password,
+    password        : process.env.PASSWORD,
     database        : 'librarydb'
 })
 
