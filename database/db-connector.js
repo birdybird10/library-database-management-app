@@ -6,7 +6,7 @@
 
 import 'dotenv/config';
 
-const password = process.env.PASSWORD
+const password = process.env.PASSWORD;
 // Get an instance of mysql we can use in the app
 var mysql = require('mysql2')
 
