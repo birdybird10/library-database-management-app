@@ -4,6 +4,9 @@
 // Authors (github username): gkochera, Cortona1, currym-osu, dmgs11
 // Source URL: https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%201%20-%20Connecting%20to%20a%20MySQL%20Database
 
+import 'dotenv/config';
+
+const password = process.env.PASSWORD
 // Get an instance of mysql we can use in the app
 var mysql = require('mysql2')
 
@@ -12,7 +15,7 @@ var pool = mysql.createPool({
     connectionLimit : 10,
     host            : 'localhost',
     user            : 'root',
-    password        : '12DancingPrincesses!*',
+    password        : password,
     database        : 'librarydb'
 })
 
